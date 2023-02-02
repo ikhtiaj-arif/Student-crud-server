@@ -48,10 +48,10 @@ async function run() {
         })
 
         // update student by id
-        app.put('/students', async(req, res)=> {
+        app.put('/student/:id', async(req, res)=> {
             const id = req.params.id;
-
-            const filter ={_id : ObjectId(id) }
+          
+            const filter ={_id : new ObjectId(id) }
             const update = req.body;
             const option = { upsert: true }
             const updatedDoc = {
@@ -66,7 +66,7 @@ async function run() {
         // delete student
         app.delete('/student/:id',  async(req, res)=>{
             const id = req.params.id;
-            const filter = { _id : ObjectId(id)}
+            const filter = { _id : new ObjectId(id)}
             const result = await studentsCollection.deleteOne(filter)
             res.send(result)
         })
